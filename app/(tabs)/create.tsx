@@ -16,7 +16,7 @@ export default function CreateScreen() {
 
   const createProjectMutation = trpc.projects.create.useMutation({
     onSuccess: (projectId) => {
-      router.push(`../editor/${projectId}`);
+      router.push(`../content-input?projectId=${projectId}`);
     },
   });
 
