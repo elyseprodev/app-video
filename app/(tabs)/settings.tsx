@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, TouchableOpacity, ActivityIndicator, Switch } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, ActivityIndicator, Switch, Linking } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/hooks/use-auth";
@@ -76,11 +76,17 @@ export default function SettingsScreen() {
           {/* Help Section */}
           <View className="gap-3">
             <Text className="text-lg font-bold text-foreground">Help</Text>
-            <TouchableOpacity className="bg-surface rounded-2xl p-4 border border-border active:opacity-70">
+            <TouchableOpacity
+              className="bg-surface rounded-2xl p-4 border border-border active:opacity-70"
+              onPress={() => router.push("../help")}
+            >
               <Text className="text-base text-foreground font-semibold">FAQ</Text>
               <Text className="text-sm text-muted mt-1">Frequently asked questions</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="bg-surface rounded-2xl p-4 border border-border active:opacity-70">
+            <TouchableOpacity
+              className="bg-surface rounded-2xl p-4 border border-border active:opacity-70"
+              onPress={() => Linking.openURL("mailto:elyseelissa7@gmail.com")}
+            >
               <Text className="text-base text-foreground font-semibold">Contact Support</Text>
               <Text className="text-sm text-muted mt-1">Get help from our support team</Text>
             </TouchableOpacity>
