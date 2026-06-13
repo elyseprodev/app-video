@@ -76,7 +76,7 @@ export default function HomeScreen() {
                 renderItem={({ item }) => (
                 <TouchableOpacity
                     className="bg-surface rounded-2xl p-4 mb-3 border border-border active:opacity-70"
-                    onPress={() => router.push(`../(tabs)/editor/${item.id}`)}
+                    onPress={() => router.push(`../editor/${item.id}`)}
                   >
                     <View className="flex-row justify-between items-start">
                       <View className="flex-1">
