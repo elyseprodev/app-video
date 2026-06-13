@@ -1,6 +1,5 @@
-import { ScrollView, Text, View, TouchableOpacity, ActivityIndicator, FlatList } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useState } from "react";
-import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/hooks/use-auth";
 
 import { ScreenContainer } from "@/components/screen-container";
@@ -8,11 +7,6 @@ import { ScreenContainer } from "@/components/screen-container";
 export default function AdminScreen() {
   const { isAuthenticated, loading: authLoading, user } = useAuth();
   const [activeTab, setActiveTab] = useState<"overview" | "users" | "exports">("overview");
-
-  const exportsQuery = trpc.exports.list.useQuery(
-    { projectId: 0 },
-    { enabled: isAuthenticated }
-  );
 
   if (authLoading) {
     return (
@@ -133,54 +127,12 @@ export default function AdminScreen() {
           {activeTab === "exports" && (
             <View className="gap-4">
               <Text className="text-base font-semibold text-foreground">Export History</Text>
-              {exportsQuery.isLoading ? (
-                <ActivityIndicator />
-              ) : (exportsQuery.data?.length ?? 0) > 0 ? (
-                <FlatList
-                  data={exportsQuery.data}
-                  keyExtractor={(item) => item.id.toString()}
-                  scrollEnabled={false}
-                  renderItem={({ item }) => (
-                    <View className="bg-surface rounded-2xl p-4 mb-3 border border-border">
-                      <View className="flex-row justify-between items-start">
-                        <View className="flex-1">
-                          <Text className="text-base font-semibold text-foreground">
-                            Export #{item.id}
-                          </Text>
-                          <Text className="text-sm text-muted mt-1">
-                            {item.format.toUpperCase()} • {item.resolution}
-                          </Text>
-                        </View>
-                        <View
-                          className={`px-3 py-1 rounded-full ${
-                            item.status === "completed"
-                              ? "bg-success/20"
-                              : item.status === "processing"
-                                ? "bg-warning/20"
-                                : "bg-error/20"
-                          }`}
-                        >
-                          <Text
-                            className={`text-xs font-semibold capitalize ${
-                              item.status === "completed"
-                                ? "text-success"
-                                : item.status === "processing"
-                                  ? "text-warning"
-                                  : "text-error"
-                            }`}
-                          >
-                            {item.status}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  )}
-                />
-              ) : (
-                <View className="bg-surface rounded-2xl p-6 border border-border items-center gap-2">
-                  <Text className="text-sm text-muted">No exports yet</Text>
-                </View>
-              )}
+              <View className="bg-surface rounded-2xl p-6 border border-border items-center gap-2">
+                <Text className="text-sm text-muted">Export history coming soon</Text>
+                <Text className="text-xs text-muted text-center">
+                  View all exports across the platform
+                </Text>
+              </View>
             </View>
           )}
         </View>
