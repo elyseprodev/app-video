@@ -18,6 +18,9 @@ export default function CreateScreen() {
     onSuccess: (projectId) => {
       router.push(`../content-input?projectId=${projectId}`);
     },
+    onError: (error) => {
+      alert(error.message || "Failed to create project");
+    },
   });
 
   if (authLoading) {

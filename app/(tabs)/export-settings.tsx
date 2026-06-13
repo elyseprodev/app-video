@@ -25,6 +25,10 @@ export default function ExportSettingsScreen() {
       setIsExporting(false);
       router.push(`../editor/${projectId}`);
     },
+    onError: (error) => {
+      setIsExporting(false);
+      alert(error.message || "Failed to create export");
+    },
   });
 
   const handleExport = async () => {

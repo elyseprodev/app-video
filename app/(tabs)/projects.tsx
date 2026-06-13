@@ -12,9 +12,13 @@ export default function ProjectsScreen() {
     enabled: isAuthenticated,
   });
 
+  const utils = trpc.useUtils();
   const deleteProjectMutation = trpc.projects.delete.useMutation({
     onSuccess: () => {
-      // Refetch projects
+      utils.projects.list.invalidate();
+    },
+    onError: (error) => {
+      alert(error.message || "Failed to delete project");
     },
   });
 

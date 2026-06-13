@@ -1,5 +1,4 @@
 import { ScrollView, Text, View, TouchableOpacity, ActivityIndicator, FlatList } from "react-native";
-import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 
 import { ScreenContainer } from "@/components/screen-container";
